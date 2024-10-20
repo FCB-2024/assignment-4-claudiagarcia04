@@ -1,47 +1,39 @@
+import sys
+
+# Funció per comptar el nombre de divisors d'un nombre
+def comptar_divisors(n):
+	comptador = 0
+	divisor = 1
+	while divisor <= n:
+		if n % divisor == 0:
+			comptador += 1
+		divisor += 1
+	return comptador
+
 ## ADD WHATEVER ARGUMENTS ARE NECESSARY TO THE MAIN FUNCTION
 ## IN THE SAME ORDER AS THE ARGUMENTS ARE TAKEN FROM THE
 ## COMMAND LINE SPECIFIED BELOW
-def main() :
-	## YOU CODE SHOULD START HERE AST THE SAME
-	## IDENTATION AS THIS COMMENT
-	import sys
-
+def main():
+	# Agafem el valor de la línia de comandes
 	n = int(sys.argv[1])
-
-	def comptar_divisors(n):
-		comptador = 0
-		divisor = 1
-		while n >= divisor:
-			if n % divisor == 0:
-					comptador +=1
-			divisor +=1
-		return comptador
-
-	def main():
-		n = int(sys.argv[1])
-
-		divisors_n = comptar_divisors(n)
-
-		es_anitprime = True
-		i = 1
-		while i < n:
-			if comptar_divisors(i) >= divisors_n:
-				es_anitprime = False
-				break
-			i += 1
-		if es_anitprime:
-			print("antiprime")
-		else:
-			print("not anti-prime")
-
-
-
-	## THE LAST LINES OF YOUR CODE SHOULD EITHER
-	## RETURN THE VALUE "anti-prime" or "not anti-prime"
-	## REPLACE THE FOLLOWING LINE BY WHATEVER LINES
-	## OF CODE ALLOW THIS FUNCTION TO RETURN THE VALUE
-	## "anti-prime" or "not anti-prime"
-	return("anti-prime")
+    
+    # Comptem els divisors de n
+	divisors_n = comptar_divisors(n)
+    
+    # Comparar amb tots els nombres menors que n
+	es_antiprime = True  # Suposem que n és antiprime
+	i = 1
+	while i < n:
+		if comptar_divisors(i) >= divisors_n:
+			es_antiprime = False  # Si algun nombre més petit té tants o més divisors, no és antiprime
+			break  # Ja podem parar la cerca
+		i += 1
+    
+    # Retornem el resultat segons si és antiprime o no
+	if es_antiprime:
+		return "anti-prime"
+	else:
+		return "not anti-prime"
 
 ## DO NOT REMOVE THIS LINE BELOW
 if __name__ == "__main__" :
